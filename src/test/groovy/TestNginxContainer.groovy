@@ -22,5 +22,14 @@ class TestNginxContainer extends DeployNginxContainer {
         assert req.searchResponse("Welcome to nginx!")
     }
 
+    def "Check container logs"() {
+
+        when: "Container is running"
+        assert nginxContainer.isRunning()
+
+        then: "Wait for container log message"
+        assert waitForLogMessage(nginxContainer, "Configuration complete")
+    }
+
 
 }  
